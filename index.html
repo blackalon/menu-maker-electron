@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu maker </title>
+    <link rel="stylesheet" href="css/main.css">
+    
+    <script src="lib/jspdf/jspdf.umd.min.js"></script>
+    <script src="lib/html2canvas/html2canvas.min.js"></script>
+    <script src="lib/qrcodejs/qrcode.min.js"></script>
+    <link rel="manifest" href="/manifest.json"> 
+</head>
+<body>
+    <div class="container">
+        <h1>أداة صانع المنيو الاحترافي</h1>
+
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="menu-items">إدارة الأصناف</button>
+            <button class="tab-button" data-tab="categories">إدارة الفئات</button>
+            <button class="tab-button" data-tab="templates">اختيار القالب</button>
+            <button class="tab-button" data-tab="app-settings">إعدادات المنيو</button>
+            <button class="tab-button" data-tab="preview-export">معاينة وتصدير</button>
+        </div>
+
+        <div id="menu-items" class="tab-content active">
+            <h2>إدارة الأصناف</h2>
+            <form id="itemForm">
+                <input type="hidden" id="itemId">
+                <input type="text" id="itemName" placeholder="اسم الصنف" required>
+                <input type="text" id="itemDescription" placeholder="وصف الصنف (اختياري)">
+                <input type="number" id="itemPrice" placeholder="السعر" step="0.01" required>
+                <select id="itemCategory" required>
+                    </select>
+                <input type="url" id="itemImageUrl" placeholder="رابط صورة الصنف (اختياري)">
+                <input type="url" id="itemVideoUrl" placeholder="رابط فيديو (YouTube/Vimeo) (اختياري)">
+                <select id="itemStatus" required>
+                    <option value="active">نشط</option>
+                    <option value="inactive">غير نشط</option>
+                </select>
+                <button type="submit">إضافة/تحديث صنف</button>
+            </form>
+            <input type="text" id="itemSearch" placeholder="بحث الأصناف...">
+            <div id="itemsList"></div>
+        </div>
+
+        <div id="categories" class="tab-content">
+            <h2>إدارة الفئات</h2>
+            <form id="categoryForm">
+                <input type="hidden" id="categoryId">
+                <input type="text" id="categoryName" placeholder="اسم الفئة" required>
+                <input type="number" id="categoryOrder" placeholder="ترتيب الفئة" value="0">
+                <button type="submit">إضافة/تحديث فئة</button>
+            </form>
+            <div class="category-order-settings">
+                <label for="categoriesOrder">ترتيب عرض الفئات:</label>
+                <select id="categoriesOrder">
+                    <option value="alphabetical">أبجدي</option>
+                    <option value="custom">ترتيب مخصص</option>
+                </select>
+                <div id="customCategoryOrderSection" style="display: none;">
+                    <h3>ترتيب الفئات المخصص (اسحب وأفلت)</h3>
+                    <ul id="customCategoryOrderList" class="sortable-list">
+                        </ul>
+                </div>
+            </div>
+            <div id="categoriesList"></div>
+        </div>
+
+        <div id="templates" class="tab-content">
+            <h2>اختيار القالب</h2>
+            <div id="templateSelection" class="template-grid">
+                </div>
+            <button id="viewMenuBtn">معاينة المنيو</button>
+        </div>
+
+        <div id="app-settings" class="tab-content">
+            <h2>إعدادات المنيو</h2>
+            <form id="settingsForm">
+                <input type="text" id="restaurantName" placeholder="اسم المطعم">
+                <input type="url" id="restaurantLogoUrl" placeholder="رابط شعار المطعم (اختياري)">
+                <input type="text" id="contactPhone" placeholder="رقم الهاتف (اختياري)">
+                <input type="text" id="contactAddress" placeholder="العنوان (اختياري)">
+                <input type="url" id="contactWebsite" placeholder="رابط الموقع الإلكتروني (اختياري)">
+                
+                <h3>إعدادات QR Code</h3>
+                <label>
+                    <input type="checkbox" id="generateQrCode">
+                    توليد QR Code للمنيو
+                </label>
+                <button type="submit">حفظ الإعدادات</button>
+            </form>
+            <div id="qrCodeContainer"></div>
+        </div>
+
+        <div id="preview-export" class="tab-content">
+            <h2>معاينة وتصدير</h2>
+            <div id="menuPreview" class="menu-preview-container"></div>
+            <div class="export-options">
+                <button id="exportPdfBtn">تصدير كـ PDF</button>
+                <button id="exportImageBtn">تصدير كصورة (PNG)</button>
+                <button id="exportHtmlBtn">تصدير كـ HTML</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/db.js"></script>
+    <script type="module" src="js/utils.js"></script>
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/templates.js"></script>
+    <script type="module" src="js/exportUtils.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

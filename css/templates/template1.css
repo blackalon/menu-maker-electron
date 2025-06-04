@@ -1,0 +1,94 @@
+/* css/templates/template1.css */
+
+/* Specific styles for template1. This will override or augment main.css */
+
+.template1 .menu-display-container {
+    border: 5px solid #f8f9fa; /* Light grey border */
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+}
+
+.template1 .restaurant-header h1 {
+    font-family: 'Georgia', serif;
+    color: #4CAF50; /* Green for restaurant name */
+    font-size: 3em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.template1 .restaurant-header .contact-info p {
+    font-style: italic;
+    color: #555;
+    font-size: 1.1em;
+}
+
+.template1 .category-title {
+    font-family: 'Segoe UI', sans-serif;
+    color: #FF5722; /* Orange for category titles */
+    font-size: 2.2em;
+    border-bottom: 3px solid #FFC107;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.template1 .category-title::after {
+    display: none; /* Remove default underline */
+}
+
+.template1 .menu-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-items: flex-start; /* Align items to the top */
+}
+
+.template1 .menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+}
+
+.template1 .item-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    margin-left: 25px; /* Adjust spacing */
+    border: 2px solid #eee;
+}
+
+.template1 .item-details {
+    flex-grow: 1;
+}
+
+.template1 .item-details .item-name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6em;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.template1 .item-details .item-description {
+    font-size: 1.05em;
+    color: #666;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.template1 .item-details .item-price {
+    font-size: 1.5em;
+    color: #E91E63; /* Pink for price */
+    font-weight: bold;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.template1 .item-video {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 15px;
+}

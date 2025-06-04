@@ -1,0 +1,18 @@
+{
+  "name": "menu-maker-app",
+  "version": "1.0.0",
+  "description": "Professional Menu Maker Application for macOS powered by Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/app-icon.icns --prune=true --out=release-builds --version-string.CompanyName='Your Company Name' --version-string.FileDescription='Professional Menu Maker' --version-string.ProductName='Menu Maker'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["menu", "maker", "app", "electron", "macos"],
+  "author": "Your Name Here",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^29.1.0",
+    "electron-packager": "^17.1.2"
+  }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="menuTitle">معاينة المنيو</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link id="menuTemplateStylesheet" rel="stylesheet" href="css/templates/template1.css">
+</head>
+<body>
+    <div id="menu-container" class="menu-display-container">
+        <p>جاري تحميل المنيو...</p>
+    </div>
+
+    <script type="module">
+        // الوصول إلى API المعرضة بواسطة menu-preload.js
+        const { menuData } = window; 
+
+        // Helper functions for video embeds (مهم جداً وجودها هنا أو استيرادها)
+        function getYouTubeEmbed(url) {
+            const regExp = /^.*(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+            const match = url.match(regExp);
+            if (match && match[1] && match[1].length === 11) {
+                return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${match[1]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            }
+            return null;
+        }
+
+        function getVimeoEmbed(url) {
+            const regExp = /(?:vimeo)\.com\/(?:video\/)?([0-9]+)/;
+            const match = url.match(regExp);
+            if (match && match[1]) {
+                return `<iframe src="https://player.vimeo.com/video/${match[1]}" width="560" height="315" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+            }
+            return null;
+        }
+
+        // وظيفة عرض المنيو
+        function renderMenu(menuHtmlContent, selectedTemplate, appSettings) {
+            const menuContainer = document.getElementById('menu-container');
+            menuContainer.innerHTML = menuHtmlContent;
+
+            // إضافة فئة القالب إلى الـ container
+            if (selectedTemplate) {
+                menuContainer.classList.add(selectedTemplate);
+            } else {
+                menuContainer.classList.add('template1'); // القالب الافتراضي
+            }
+
+            // تحديث عنوان الصفحة
+            const menuTitleElement = document.getElementById('menuTitle');
+            if (menuTitleElement) {
+                menuTitleElement.textContent = appSettings.restaurantName || 'قائمة طعام المطعم';
+            }
+
+            // تحديث ملف CSS الخاص بالقالب ديناميكياً
+            const templateStylesheet = document.getElementById('menuTemplateStylesheet');
+            if (templateStylesheet) {
+                templateStylesheet.href = `css/templates/${selectedTemplate || 'template1'}.css`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const { menuHtmlContent, selectedTemplate, appSettings } = await menuData.get();
+
+            if (menuHtmlContent && appSettings) {
+                renderMenu(menuHtmlContent, selectedTemplate, appSettings);
+            } else {
+                document.getElementById('menu-container').innerHTML = '<p>لا يوجد منيو متاح حاليًا.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
